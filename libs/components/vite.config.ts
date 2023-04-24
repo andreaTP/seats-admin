@@ -17,7 +17,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, "src/main.ts"),
     },
     rollupOptions: {
-      external: [...Object.keys(packageJson.peerDependencies)]
+      external: [...Object.keys(packageJson.peerDependencies)],
     },
   },
   plugins: [

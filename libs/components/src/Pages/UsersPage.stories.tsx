@@ -14,11 +14,17 @@ const Template: StoryFn<typeof UsersPage> = (args) => (
   </ServiceContextProvider>
 );
 
+import { checkPermission } from "client";
 export const NoSubscription = Template.bind({});
 NoSubscription.parameters = {
   msw: {
     handlers: [
       rest.get("/aw-api/subscriptions", (req, res, ctx) => {
+
+        console.log("DEBUG NOW");
+        checkPermission();
+        console.log("END DEBUG");
+
         return res(
           ctx.delay(150),
           ctx.json({
@@ -28,6 +34,11 @@ NoSubscription.parameters = {
         );
       }),
       rest.get("/aw-api/users", (req, res, ctx) => {
+
+        console.log("DEBUG NOW");
+        checkPermission();
+        console.log("END DEBUG");
+
         return res(ctx.delay(450), ctx.json([]));
       }),
     ],

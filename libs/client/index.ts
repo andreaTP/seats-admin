@@ -35,10 +35,12 @@ import { CheckRequestBuilderPostRequestConfiguration } from "./api/v1alpha/check
 // );
 
 const adapter = new FetchRequestAdapter(new AnonymousAuthenticationProvider());
+adapter.baseUrl = "http://localhost:1080";
 const client = new Authz(adapter);
 
 export async function checkPermission(): Promise<void> {
   try {
+    console.log("Again!");
     const request = new V1alphaCheckPermissionRequest();
     request.subject = "okay";
     request.operation = "use";
@@ -52,7 +54,7 @@ export async function checkPermission(): Promise<void> {
     const result = await client.v1alpha.check.post(request, requestConfiguration);
     console.log(result);
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     console.log(
       "what",
       (err as V1alphaCheckPermissionResponse401Error).additionalData
